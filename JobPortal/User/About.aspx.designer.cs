@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OnlineJobPortal
+namespace JobPortal.User
 {
 
 
