@@ -13,7 +13,7 @@
                 <div class="col-md-12">
                     <asp:GridView ID="GridView1" runat="server" CssClass="table table-hover table-bordered" 
                         EmptyDataText="No record to Display...!" AutoGenerateColumns="False" AllowPaging="True" PageSize="5" 
-                        OnPageIndexChanging="GridView1_PageIndexChanging" DataKeyNames="JobId" OnRowDeleting ="GridView1_RowDeleting">
+                        OnPageIndexChanging="GridView1_PageIndexChanging" DataKeyNames="JobId" OnRowDeleting ="GridView1_RowDeleting" OnRowCommand="GridView1_RowCommand1">
                         <Columns>
                             <asp:BoundField DataField="Sr.No" HeaderText="Sr.No">
                             <ItemStyle HorizontalAlign="Center" />
@@ -54,6 +54,14 @@
                             <asp:BoundField DataField="CreateDate" HeaderText="Posted Date" DataFormatString="{0:dd MMMM yyyy}">
                             <ItemStyle HorizontalAlign="Center" />
                             </asp:BoundField>
+
+                            <asp:TemplateField HeaderText="Edit">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="btnEditJob" runat="server" CommandName="EditJob" CommandArgument='<%# Eval("JobId") %>'>
+                                        <asp:Image ID="Img" runat="server" ImageUrl="../assets/img/icon/editPencil.jpg" Height="25px" />
+                                    </asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
 
                             <asp:CommandField CausesValidation="false" HeaderText="Delete" ShowDeleteButton="true"
                                 DeleteImageUrl="../assets/img/icon/trashIcon.png" ButtonType="Image">
