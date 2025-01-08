@@ -5,10 +5,19 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="background-image: url('../Images/bg.jpg'); width: 100%; height: 720px; background-repeat: no-repeat; background-size: cover; background-attachment: fixed;">
         <div class="container pt-4 pb-4">
-            <div>
+            <%--<div>
                 <asp:Label ID="lblMsg" runat="server"></asp:Label>
+            </div>--%>
+            <div class="btn-toolbar justify-content-between mb-3">
+                <div class="btn-group">
+                    <asp:Label ID="lblMsg" runat="server"></asp:Label>
+                </div>
+                <div class="input-group h-25">
+                    <asp:HyperLink ID="linkBack" runat="server" NavigateUrl="~/Admin/JobList.aspx" CssClass="btn btn-secondary"
+                        Visible = "false">< Back</asp:HyperLink>
+                </div>
             </div>
-            <h3 class="text-center">Add Job</h3>
+            <h3 class="text-center"><% Response.Write(Session["title"]); %></h3>
             <div class="row mr-lg-5 ml-lg-5 mb-3">
                 <div class="col-md-6 pt-3">
                     <asp:Label for="txtJobTitle" style="font-weight: 600;">Job Title</asp:Label>
@@ -17,7 +26,7 @@
             </div>
             <div class="row mr-lg-5 ml-lg-5 mb-3">
                 <div class="col-md-6 pt-3">
-                    <asp:Label for="txtNoOfPost" style="font-weight: 600;">Numbeer Of Post</asp:Label>
+                    <asp:Label for="txtNoOfPost" style="font-weight: 600;">Number Of Post</asp:Label>
                     <asp:TextBox ID="txtNoOfPost" runat="server" CssClass="form-control" placeholder="Enter Number of Position" TextMode="Number" required></asp:TextBox>
                 </div>
             </div>

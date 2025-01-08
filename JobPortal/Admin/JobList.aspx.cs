@@ -69,12 +69,12 @@ namespace JobPortal.Admin
                 if (r > 0)
                 {
                     lblMsg.Text = "Job deleted successfully!";
-                    lblMsg.Text = "alert alert-success";
+                    lblMsg.CssClass = "alert alert-success";
                 }
                 else
                 {
                     lblMsg.Text = "Cannot delete this record!";
-                    lblMsg.Text = "alert alert-danger";
+                    lblMsg.CssClass = "alert alert-danger";
                 }
                 con.Close();
                 GridView1.EditIndex = -1;
@@ -84,6 +84,14 @@ namespace JobPortal.Admin
             {
                 con.Close();
                 Response.Write("<script>alert('" + ex.Message + "');</script>");
+            }
+        }
+
+        protected void GridView1_RowCommand1(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "EditJob")
+            {
+                Response.Redirect("NewJob.aspx?id=" + e.CommandArgument.ToString());
             }
         }
     }
