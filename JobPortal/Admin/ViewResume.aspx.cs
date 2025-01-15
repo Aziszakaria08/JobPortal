@@ -11,13 +11,14 @@ using System.Web.UI.WebControls;
 
 namespace JobPortal.Admin
 {
-    public partial class JobList : System.Web.UI.Page
+    public partial class ViewResume : System.Web.UI.Page
     {
+
         SqlConnection con;
         SqlCommand cmd;
         DataTable dt;
         string str = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
-        string query;
+
         protected void Page_PreRender(object sender, EventArgs e)
         {
             if (Session["admin"] == null)
@@ -26,37 +27,33 @@ namespace JobPortal.Admin
             }
             if (!IsPostBack)
             {
-                showJob();
+                showAppliedJob();
             }
         }
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            showJob();
-        }
-
-        private void showJob()
+        private void showAppliedJob()
         {
             string query = string.Empty;
             con = new SqlConnection(str);
-            query = @"Select Row_Number() over(Order by(Select 1)) as [Sr.No], JobId, Title, NoOfPost, Qualification,
-                    Experience, LastDateToApply, CompanyName, Country, State, CreateDate from Jobs";
+            query = @"Select Row_Number() over(Order by(Select 1)) as [Sr.No], j.NoOfPost, aj.AppliedJobId, j.CompanyName, aj.JobId, j.Title, u.Mobile, u.Name, u.Email, u.Resume from AppliedJobs aj 
+                    inner join [User] u on aj.UserId = u.UserId
+                    inner join Jobs j on aj.JobId = j.JobId";
             cmd = new SqlCommand(query, con);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             dt = new DataTable();
             sda.Fill(dt);
             GridView1.DataSource = dt;
             GridView1.DataBind();
-            if(Request.QueryString["id"] != null)
-            {
-                linkBack.Visible = true;
-            }
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
         }
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             GridView1.PageIndex = e.NewPageIndex;
-            showJob();
+            showAppliedJob();
         }
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -64,15 +61,15 @@ namespace JobPortal.Admin
             try
             {
                 GridViewRow row = GridView1.Rows[e.RowIndex];
-                int jobId = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0]);
+                int appliedJobId = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0]);
                 con = new SqlConnection(str);
-                cmd = new SqlCommand("Delete from jobs where JobId = @id", con);
-                cmd.Parameters.AddWithValue("@id", jobId);
+                cmd = new SqlCommand("Delete from AppliedJobs where AppliedJobId = @id", con);
+                cmd.Parameters.AddWithValue("@id", appliedJobId);
                 con.Open();
                 int r = cmd.ExecuteNonQuery();
                 if (r > 0)
                 {
-                    lblMsg.Text = "Job deleted successfully!";
+                    lblMsg.Text = "Resume deleted successfully!";
                     lblMsg.CssClass = "alert alert-success";
                 }
                 else
@@ -81,9 +78,9 @@ namespace JobPortal.Admin
                     lblMsg.CssClass = "alert alert-danger";
                 }
                 GridView1.EditIndex = -1;
-                showJob();
+                showAppliedJob();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Response.Write("<script>alert('" + ex.Message + "');</script>");
             }
@@ -93,26 +90,25 @@ namespace JobPortal.Admin
             }
         }
 
-        protected void GridView1_RowCommand1(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "EditJob")
-            {
-                Response.Redirect("NewJob.aspx?id=" + e.CommandArgument.ToString());
-            }
-        }
-
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if(e.Row.RowType == DataControlRowType.DataRow)
+            e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(GridView1, "Select$" + e.Row.RowIndex);
+            e.Row.ToolTip = "Click To View Job Details";
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach(GridViewRow row in GridView1.Rows)
             {
-                e.Row.ID = e.Row.RowIndex.ToString();
-                if(Request.QueryString["id"] != null)
+                if(row.RowIndex == GridView1.SelectedIndex)
                 {
-                    int jobId = Convert.ToInt32(GridView1.DataKeys[e.Row.RowIndex].Values[0]);
-                    if(jobId == Convert.ToInt32(Request.QueryString["id"]))
-                    {
-                        e.Row.BackColor = ColorTranslator.FromHtml("#A1DCF2");
-                    }
+                    HiddenField jobId = (HiddenField)row.FindControl("hdnJobId");
+                    Response.Redirect("JobList.aspx?id=" + jobId.Value);
+                }
+                else
+                {
+                    row.BackColor = ColorTranslator.FromHtml("#ffffff");
+                    row.ToolTip = "Click to select this row";
                 }
             }
         }

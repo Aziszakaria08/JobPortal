@@ -70,14 +70,16 @@ namespace JobPortal.Admin
                     lblMsg.Text = "Cannot delete this record!";
                     lblMsg.CssClass = "alert alert-danger";
                 }
-                con.Close();
                 GridView1.EditIndex = -1;
                 showContact();
             }
             catch (Exception ex)
             {
-                con.Close();
                 Response.Write("<script>alert('" + ex.Message + "');</script>");
+            }
+            finally
+            {
+                con.Close();
             }
         }
     }

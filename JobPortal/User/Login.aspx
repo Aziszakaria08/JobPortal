@@ -42,7 +42,6 @@
                                 </div>
                             </div>
                             <div class="form-group mt-3">
-                               <%-- <button type="submit" class="button button-contactForm boxed-btn">Send</button>--%>
                                 <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="button button-contactForm boxed-btn mr-4" OnClick="btnLogin_Click" />
                                 <span class="clickLink"><a href="../User/Register.aspx"> New User? CLik Here..</a></span>
                             </div>

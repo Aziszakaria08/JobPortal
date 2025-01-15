@@ -2,8 +2,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-    <!-- Hero Area Start-->
     <div class="slider-area ">
         <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="../assets/img/hero/about.jpg">
             <div class="container">
@@ -17,8 +15,6 @@
             </div>
         </div>
     </div>
-        <!-- Hero Area End -->
-    <!-- ================ contact section start ================= -->
     <section class="contact-section">
             <div class="container">
                 <div class="d-none d-sm-block mb-5 pb-4">
@@ -69,7 +65,6 @@
                         <h2 class="contact-title">Get in Touch</h2>
                     </div>
                     <div class="col-lg-8">
-                        <%--<form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">--%>
                           <div class="form-contact contact_form" id="contactForm" novalidate="novalidate">  
                             <div class="row">
                                 <div class="col-12">
@@ -94,32 +89,29 @@
                                 </div>
                             </div>
                             <div class="form-group mt-3">
-                               <%-- <button type="submit" class="button button-contactForm boxed-btn">Send</button>--%>
-                                <%--<asp:Button ID="btnSend" runat="server" Text="Send" CssClass="button button-contactForm boxed-btn" OnClick="btnSend_Click" />--%>
                                 <asp:Button ID="btnSend" runat="server" Text="Send" CssClass="button button-contactForm boxed-btn" OnClick="btnSend_Click" />
                             </div>
                         </div>
-                        <%--</form>--%>
                     </div>
                     <div class="col-lg-3 offset-lg-1">
                         <div class="media contact-info">
                             <span class="contact-info__icon"><i class="ti-home"></i></span>
                             <div class="media-body">
-                                <h3>Buttonwood, California.</h3>
-                                <p>Rosemead, CA 91770</p>
+                                <h3>Purwokerto, Indonesia.</h3>
+                                <p>Universitas Amikom Purwokerto</p>
                             </div>
                         </div>
                         <div class="media contact-info">
                             <span class="contact-info__icon"><i class="ti-tablet"></i></span>
                             <div class="media-body">
-                                <h3>+1 253 565 2365</h3>
+                                <h3>+62 8253 5565 2365</h3>
                                 <p>Mon to Fri 9am to 6pm</p>
                             </div>
                         </div>
                         <div class="media contact-info">
                             <span class="contact-info__icon"><i class="ti-email"></i></span>
                             <div class="media-body">
-                                <h3>support@colorlib.com</h3>
+                                <h3>Universitasamikompwt@gmail.com</h3>
                                 <p>Send us your query anytime!</p>
                             </div>
                         </div>
@@ -127,6 +119,4 @@
                 </div>
             </div>
         </section>
-    <!-- ================ contact section end ================= -->
-
 </asp:Content>
