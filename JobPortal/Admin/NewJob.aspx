@@ -68,6 +68,7 @@
                         <asp:ListItem Value="0">Type Job</asp:ListItem>
                         <asp:ListItem>Full Time</asp:ListItem>
                         <asp:ListItem>Part Time</asp:ListItem>
+                        <asp:ListItem>Remote</asp:ListItem>
                         <asp:ListItem>Freelance</asp:ListItem>
                     </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Job Type Is Required" ForeColor="Red"

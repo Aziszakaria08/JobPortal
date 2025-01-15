@@ -28,7 +28,6 @@ namespace JobPortal.Admin
                 fillData();
             }
         }
-
         private void fillData()
         {
           if (Request.QueryString["id"] != null)
@@ -90,7 +89,7 @@ namespace JobPortal.Admin
 
                 if (Request.QueryString["id"] != null)
                 {
-                    if (fuCompanyLogo.HasFile && isValidExtension(fuCompanyLogo.FileName))
+                    if (fuCompanyLogo.HasFile && Utils.isValidExtension(fuCompanyLogo.FileName))
                     {
                         concatQuery = "CompanyImage = @CompanyImage,";
                     }
@@ -145,7 +144,7 @@ namespace JobPortal.Admin
                     cmd.Parameters.AddWithValue("@CreateDate", DateTime.Now);
                 }
 
-                if (fuCompanyLogo.HasFile && isValidExtension(fuCompanyLogo.FileName))
+                if (fuCompanyLogo.HasFile && Utils.isValidExtension(fuCompanyLogo.FileName))
                 {
                     Guid obj = Guid.NewGuid();
                     imagePath = "Images/" + obj.ToString() + fuCompanyLogo.FileName;
@@ -200,19 +199,19 @@ namespace JobPortal.Admin
             ddlCountry.ClearSelection();
 
         }
-        private bool isValidExtension(string fileName)
-        {
-            bool isValid = false;
-            string[] fileExtension = { ".jpg", ".jpeg", ".png" };
-            for(int i = 0; i <= fileExtension.Length-1; i++)
-            {
-                if (fileName.Contains(fileExtension[i]))
-                {
-                    isValid = true;
-                    break;
-                }
-            }
-            return isValid;
-        }
+        //private bool isValidExtension(string fileName)
+        //{
+        //    bool isValid = false;
+        //    string[] fileExtension = { ".jpg", ".jpeg", ".png" };
+        //    for (int i = 0; i <= fileExtension.Length - 1; i++)
+        //    {
+        //        if (fileName.Contains(fileExtension[i]))
+        //        {
+        //            isValid = true;
+        //            break;
+        //        }
+        //    }
+        //    return isValid;
+        //}
     }
 }

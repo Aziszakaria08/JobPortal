@@ -82,7 +82,6 @@
                                 </div>
                             </div>
                             <div class="form-group mt-3">
-                               <%-- <button type="submit" class="button button-contactForm boxed-btn">Send</button>--%>
                                 <asp:Button ID="btnRegister" runat="server" Text="Register" CssClass="button button-contactForm boxed-btn mr-4" OnClick="btnRegister_Click" />
                                 <span class="clickLink"><a href="../User/Login.aspx"> Already Register? CLik Here..</a></span>
                             </div>

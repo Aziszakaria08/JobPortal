@@ -11,7 +11,6 @@ namespace JobPortal.User
 {
     public partial class Contact : System.Web.UI.Page
     {
-
         SqlConnection con;
         SqlCommand cmd;
         string str = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
@@ -19,7 +18,6 @@ namespace JobPortal.User
         {
 
         }
-
         protected void btnSend_Click(object sender, EventArgs e)
         {
             try

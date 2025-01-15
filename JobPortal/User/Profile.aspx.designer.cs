@@ -11,7 +11,7 @@ namespace JobPortal.User
 {
 
 
-    public partial class Default
+    public partial class Profile
     {
     }
 }
